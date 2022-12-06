@@ -95,7 +95,7 @@ public class Dao {
 			// and PASS (insert) that data into your User table
 			for (List<String> rowData : array) {
 
-				sql = "insert into jpapa_users(uname,upass,admin) " + "values('" + rowData.get(0) + "'," + " '"
+				sql = "insert into support_users(uname,upass,admin) " + "values('" + rowData.get(0) + "'," + " '"
 						+ rowData.get(1) + "','" + rowData.get(2) + "');";
 				statement.executeUpdate(sql);
 			}
@@ -113,7 +113,7 @@ public class Dao {
 		int id = 0;
 		try {
 			statement = getConnection().createStatement();
-			statement.executeUpdate("Insert into jpapa_tickets" + "(ticket_issuer, ticket_description) values(" + " '"
+			statement.executeUpdate("Insert into support_tickets" + "(ticket_issuer, ticket_description) values(" + " '"
 					+ ticketName + "','" + ticketDesc + "')", Statement.RETURN_GENERATED_KEYS);
 
 			// retrieve ticket id number newly auto generated upon record insertion
@@ -137,7 +137,7 @@ public class Dao {
 		ResultSet results = null;
 		try {
 			statement = connect.createStatement();
-			results = statement.executeQuery("SELECT * FROM jpapa_tickets");
+			results = statement.executeQuery("SELECT * FROM support_tickets");
 			//connect.close();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
