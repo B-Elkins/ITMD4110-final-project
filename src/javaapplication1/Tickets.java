@@ -40,6 +40,10 @@ public class Tickets extends JFrame implements ActionListener {
 		createMenu();
 		prepareGUI();
 
+		if (chkIfAdmin != true) {
+			mnuAdmin.setVisible(false);
+		}
+
 	}
 
 	private void createMenu() {
