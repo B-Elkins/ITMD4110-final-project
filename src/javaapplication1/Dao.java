@@ -38,8 +38,8 @@ public class Dao {
 
 	public void createTables() {
 		// variables for SQL Query table creations
-		final String createTicketsTable = "CREATE TABLE support_tickets(ticket_id INT AUTO_INCREMENT PRIMARY KEY, ticket_issuer VARCHAR(30), ticket_description VARCHAR(200))";
-		final String createUsersTable = "CREATE TABLE support_users(uid INT AUTO_INCREMENT PRIMARY KEY, uname VARCHAR(30), upass VARCHAR(30), admin int)";
+		final String createTicketsTable = "CREATE TABLE belki_support_tickets(ticket_id INT AUTO_INCREMENT PRIMARY KEY, ticket_issuer VARCHAR(30), ticket_description VARCHAR(200))";
+		final String createUsersTable = "CREATE TABLE belki_users(uid INT AUTO_INCREMENT PRIMARY KEY, uname VARCHAR(30), upass VARCHAR(30), admin int)";
 
 		try {
 
@@ -94,7 +94,7 @@ public class Dao {
 			// and PASS (insert) that data into your User table
 			for (List<String> rowData : array) {
 
-				sql = "insert into support_users(uname,upass,admin) " + "values('" + rowData.get(0) + "'," + " '"
+				sql = "insert into belki_support_users(uname,upass,admin) " + "values('" + rowData.get(0) + "'," + " '"
 						+ rowData.get(1) + "','" + rowData.get(2) + "');";
 				statement.executeUpdate(sql);
 			}
@@ -112,7 +112,7 @@ public class Dao {
 		int id = 0;
 		try {
 			statement = getConnection().createStatement();
-			statement.executeUpdate("Insert into support_tickets" + "(ticket_issuer, ticket_description) values(" + " '"
+			statement.executeUpdate("Insert into belki_support_tickets" + "(ticket_issuer, ticket_description) values(" + " '"
 					+ ticketName + "','" + ticketDesc + "')", Statement.RETURN_GENERATED_KEYS);
 
 			// retrieve ticket id number newly auto generated upon record insertion
@@ -135,7 +135,7 @@ public class Dao {
 		ResultSet results = null;
 		try {
 			statement = connect.createStatement();
-			results = statement.executeQuery("SELECT * FROM support_tickets");
+			results = statement.executeQuery("SELECT * FROM belki_support_tickets");
 			//connect.close();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
@@ -148,7 +148,7 @@ public class Dao {
 		try {
 			System.out.println("Creating update statement...");
 			statement = connect.createStatement();
-			String sql = "UPDATE jpapa_tickets " +
+			String sql = "UPDATE belki_support_tickets " +
 						 "SET ticket_desc =" + "'" + updatedDesc + "'" +  "WHERE id in (100, 101)";
 			statement.executeUpdate(sql);
 		} catch (SQLException e) {
@@ -161,7 +161,7 @@ public class Dao {
 		try {
 			System.out.println("Creating statement...");
 			statement = connect.createStatement();
-			String sql = "DELETE FROM support_tickets " + "WHERE id = " + tickID;
+			String sql = "DELETE FROM belki_support_tickets " + "WHERE id = " + tickID;
 
 			int response = JOptionPane.showConfirmDialog(null, "Delete ticket" + tickID + "?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
