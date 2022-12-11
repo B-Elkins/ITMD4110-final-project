@@ -24,7 +24,7 @@ public class Dao {
 	  
 	}
 
-	public Connection getConnection() {
+	public static Connection getConnection() {
 		// Setup the connection with the DB
 		try {
 			connect = DriverManager.getConnection("jdbc:mysql://www.papademas.net:3307/tickets?autoReconnect=true&useSSL=false" + "&user=fp411&password=411");
