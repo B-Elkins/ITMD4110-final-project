@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -38,7 +39,7 @@ public class Dao {
 
 	public void createTables() {
 		// variables for SQL Query table creations
-		final String createTicketsTable = "CREATE TABLE belki_support_tickets(ticket_id INT AUTO_INCREMENT PRIMARY KEY, ticket_issuer VARCHAR(30), ticket_description VARCHAR(200))";
+		final String createTicketsTable = "CREATE TABLE belki_support_tickets(ticket_id INT AUTO_INCREMENT PRIMARY KEY, ticket_issuer VARCHAR(30), ticket_description VARCHAR(200), open_date DATE, close_date DATE)";
 		final String createUsersTable = "CREATE TABLE belki_users(uid INT AUTO_INCREMENT PRIMARY KEY, uname VARCHAR(30), upass VARCHAR(30), admin int)";
 
 		try {
@@ -95,7 +96,7 @@ public class Dao {
 			for (List<String> rowData : array) {
 
 				sql = "insert into belki_support_users(uname,upass,admin) " + "values('" + rowData.get(0) + "'," + " '"
-						+ rowData.get(1) + "','" + rowData.get(2) + "');";
+						+ rowData.get(1) + "','" + rowData.get(2) + "','" + LocalDate.now() + "'";
 				statement.executeUpdate(sql);
 			}
 			System.out.println("Inserts completed in the given database...");
