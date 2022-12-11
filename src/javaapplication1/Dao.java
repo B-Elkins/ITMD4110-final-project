@@ -96,7 +96,7 @@ public class Dao {
 			for (List<String> rowData : array) {
 
 				sql = "insert into belki_support_users(uname,upass,admin) " + "values('" + rowData.get(0) + "'," + " '"
-						+ rowData.get(1) + "','" + rowData.get(2) + "','" + LocalDate.now() + "'";
+						+ rowData.get(1) + "','" + rowData.get(2) + "'";
 				statement.executeUpdate(sql);
 			}
 			System.out.println("Inserts completed in the given database...");
