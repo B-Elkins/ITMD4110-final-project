@@ -25,11 +25,8 @@ public class Dao {
 	public Connection getConnection() {
 		// Setup the connection with the DB
 		try {
-			connect = DriverManager
-					.getConnection("jdbc:mysql://www.papademas.net:3307/tickets?autoReconnect=true&useSSL=false"
-							+ "&user=fp411&password=411");
+			connect = DriverManager.getConnection("jdbc:mysql://www.papademas.net:3307/tickets?autoReconnect=true&useSSL=false" + "&user=fp411&password=411");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return connect;
@@ -125,7 +122,6 @@ public class Dao {
 			}
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return id;
@@ -145,6 +141,18 @@ public class Dao {
 		return results;
 	}
 	// continue coding for updateRecords implementation
+
+	public void updateRecords(String updatedDesc) {
+		try {
+			System.out.println("Creating update statement...");
+			statement = connect.createStatement();
+			String sql = "UPDATE jpapa_tickets " +
+						 "SET ticket_desc =" + "'" + updatedDesc + "'" +  "WHERE id in (100, 101)";
+			statement.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	// continue coding for deleteRecords implementation
 }
