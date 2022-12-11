@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 public class Dao {
 	// instance fields
 	static Connection connect = null;
@@ -155,4 +157,23 @@ public class Dao {
 	}
 
 	// continue coding for deleteRecords implementation
+	public void deleteRecords(int tickID) {
+		try {
+			System.out.println("Creating statement...");
+			statement = connect.createStatement();
+			String sql = "DELETE FROM support_tickets " + "WHERE id = " + tickID;
+
+			int response = JOptionPane.showConfirmDialog(null, "Delete ticket" + tickID + "?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+			if (response == JOptionPane.NO_OPTION) {
+				System.out.println("NO record deleted");
+			} else if (response == JOptionPane.YES_OPTION) {
+				statement.executeUpdate(sql);
+			} else if (response == JOptionPane.CLOSED_OPTION) {
+				System.out.println("Request cancelled");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
