@@ -42,6 +42,7 @@ public class Tickets extends JFrame implements ActionListener {
 
 		if (chkIfAdmin != true) {
 			mnuAdmin.setVisible(false);
+			mnuItemViewTicket.setVisible(false);
 		}
 
 	}
