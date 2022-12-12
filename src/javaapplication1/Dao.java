@@ -162,7 +162,7 @@ public class Dao {
 		try {
 			System.out.println("Creating statement...");
 			statement = connect.createStatement();
-			String sql = "DELETE FROM belki_support_tickets2 " + "WHERE id = " + tickID;
+			String sql = "DELETE FROM belki_support_tickets2 " + "WHERE ticket_id = " + tickID;
 
 			int response = JOptionPane.showConfirmDialog(null, "Delete ticket" + tickID + "?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
@@ -173,7 +173,7 @@ public class Dao {
 			} else if (response == JOptionPane.CLOSED_OPTION) {
 				System.out.println("Request cancelled");
 			}
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
