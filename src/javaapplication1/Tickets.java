@@ -174,7 +174,13 @@ public class Tickets extends JFrame implements ActionListener {
 		}
 
 		else if (e.getSource() == mnuItemDelete) {
+			try {
+				int tickID = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter ticket ID:"));
+				dao.deleteRecords(tickID);
 
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
 		}
 
 		else if (e.getSource() == mnuItemUpdate) {
