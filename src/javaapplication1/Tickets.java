@@ -160,6 +160,10 @@ public class Tickets extends JFrame implements ActionListener {
 		}
 
 		else if (e.getSource() == mnuItemDelete) {
+
+		}
+
+		else if (e.getSource() == mnuItemUpdate) {
 			
 		}
 		/*
