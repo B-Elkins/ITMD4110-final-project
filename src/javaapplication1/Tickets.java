@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
@@ -92,6 +93,7 @@ public class Tickets extends JFrame implements ActionListener {
 		mnuItemDelete.addActionListener(this);
 		mnuItemOpenTicket.addActionListener(this);
 		mnuItemViewTicket.addActionListener(this);
+		mnuItemCloseTicket.addActionListener(this);
 
 		 /*
 		  * continue implementing any other desired sub menu items (like 
@@ -152,7 +154,25 @@ public class Tickets extends JFrame implements ActionListener {
 		}
 
 		else if (e.getSource() == mnuItemCloseTicket) {
+			try {
+				int tickID = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter ticket ID: "));
+				int response = JOptionPane.showConfirmDialog(null, "Close ticket" + tickID + "?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
+				LocalDate close_date = LocalDate.now();
+				String sql = "INSERT into belki_support_tickets2(close_date) values(" + "'" + close_date + "');";
+
+				PreparedStatement statement = dao.getConnection().prepareStatement(sql);
+
+				if (response == JOptionPane.NO_OPTION) {
+					System.out.println("NO ticket closed");
+				} else if (response == JOptionPane.YES_OPTION) {
+					statement.executeUpdate(sql);
+				} else if (response == JOptionPane.CLOSED_OPTION) {
+					System.out.println("Request cancelled");
+				}
+			} catch (SQLException e4) {
+				e4.printStackTrace();
+			}
 		}
 
 		else if (e.getSource() == mnuItemViewTicket) {
