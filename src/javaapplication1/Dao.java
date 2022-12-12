@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -108,7 +109,7 @@ public class Dao {
 		}
 	}
 
-	public int insertRecords(String ticketName, String ticketDesc, String openDate) {
+	public int insertRecords(String ticketName, String ticketDesc, LocalDate openDate) {
 		int id = 0;
 		try {
 			statement = getConnection().createStatement();
