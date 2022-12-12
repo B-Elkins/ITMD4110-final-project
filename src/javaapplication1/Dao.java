@@ -145,12 +145,12 @@ public class Dao {
 	}
 	// continue coding for updateRecords implementation
 
-	public void updateRecords(String updatedDesc) {
+	public void updateRecords(String updatedDesc, int tickID) {
 		try {
 			System.out.println("Creating update statement...");
 			statement = connect.createStatement();
 			String sql = "UPDATE belki_support_tickets2 " +
-						 "SET ticket_desc =" + "'" + updatedDesc + "'" +  "WHERE ticket_id in (100, 101)";
+						 "SET ticket_description =" + "'" + updatedDesc + "'" +  "WHERE ticket_id = " + tickID;
 			statement.executeUpdate(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
