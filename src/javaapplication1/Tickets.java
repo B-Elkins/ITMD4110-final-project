@@ -1,5 +1,6 @@
 package javaapplication1;
 
+//Imports
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,29 +22,31 @@ public class Tickets extends JFrame implements ActionListener {
 
 	// class level member objects
 	Dao dao = new Dao(); // for CRUD operations
-	Boolean chkIfAdmin = null;
+	Boolean chkIfAdmin = null; //Intialize variable
 
 	// Main menu object items
-	private JMenu mnuFile = new JMenu("File");
-	private JMenu mnuAdmin = new JMenu("Admin");
-	private JMenu mnuTickets = new JMenu("Tickets");
+	private JMenu mnuFile = new JMenu("File"); //initialize File main menu
+	private JMenu mnuAdmin = new JMenu("Admin"); //initialize Admin main menu
+	private JMenu mnuTickets = new JMenu("Tickets"); //initialize Tickets main menu
 
 	// Sub menu item objects for all Main menu item objects
-	JMenuItem mnuItemExit;
-	JMenuItem mnuItemUpdate;
-	JMenuItem mnuItemDelete;
-	JMenuItem mnuItemOpenTicket;
-	JMenuItem mnuItemCloseTicket;
-	JMenuItem mnuItemViewTicket;
+	JMenuItem mnuItemExit; //create exit button
+	JMenuItem mnuItemUpdate; //update button
+	JMenuItem mnuItemDelete; //delete button
+	JMenuItem mnuItemOpenTicket; //open ticket button
+	JMenuItem mnuItemCloseTicket; //close ticket button
+	JMenuItem mnuItemViewTicket; //view tickets button
 
+	//primary method that calls the other methods
 	public Tickets(Boolean isAdmin) {
 
-		chkIfAdmin = isAdmin;
-		createMenu();
-		prepareGUI();
+		chkIfAdmin = isAdmin; //variable that gets passed from parameter
+		createMenu(); //call createMenu method
+		prepareGUI(); //call prepareGUI method
 
-		System.out.println("Is Admin: " + chkIfAdmin);
-		if (chkIfAdmin != true) {
+		System.out.println("Is Admin: " + chkIfAdmin); // print to console if the logged in user is an admin
+		if (chkIfAdmin != true) { //condition for checking if the logged in user is an admin
+			//if not an admin make the following invisible
 			mnuAdmin.setVisible(false);
 			mnuItemViewTicket.setVisible(false);
 		}
@@ -94,24 +97,17 @@ public class Tickets extends JFrame implements ActionListener {
 		mnuItemViewTicket.addActionListener(this);
 		mnuItemCloseTicket.addActionListener(this);
 
-		 /*
-		  * continue implementing any other desired sub menu items (like 
-		  * for update and delete sub menus for example) with similar 
-		  * syntax & logic as shown above
-		 */
-
-
 	}
 
 	private void prepareGUI() {
 
 		// create JMenu bar
-		JMenuBar bar = new JMenuBar();
+		JMenuBar bar = new JMenuBar(); //create menu bar
 		bar.add(mnuFile); // add main menu items in order, to JMenuBar
-		bar.add(mnuAdmin);
-		bar.add(mnuTickets);
+		bar.add(mnuAdmin); // add admin menu to bar
+		bar.add(mnuTickets);// add tickets menu to bar
 		// add menu bar components to frame
-		setJMenuBar(bar);
+		setJMenuBar(bar); //set bar
 
 		addWindowListener(new WindowAdapter() {
 			// define a window close operation
@@ -129,34 +125,41 @@ public class Tickets extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// implement actions for sub menu items
+
+		//action for exit button
 		if (e.getSource() == mnuItemExit) {
 			System.exit(0);
 		} 
 		
+		//actions for open tickets button
 		else if (e.getSource() == mnuItemOpenTicket) {
 
 			// get ticket information
-			String ticketName = JOptionPane.showInputDialog(null, "Enter your name");
-			String ticketDesc = JOptionPane.showInputDialog(null, "Enter a ticket description");
-			LocalDate openDate = LocalDate.now();
+			String ticketName = JOptionPane.showInputDialog(null, "Enter your name"); //prompt user for their name
+			String ticketDesc = JOptionPane.showInputDialog(null, "Enter a ticket description"); //prompt user for a description of their problem
+			LocalDate openDate = LocalDate.now(); //get the current date
 
 			// insert ticket information to database
 
-			int id = dao.insertRecords(ticketName, ticketDesc, openDate);
+			//above variables are passed to the method
+			int id = dao.insertRecords(ticketName, ticketDesc, openDate); // assign return value of insertRecords to variable
 
 			// display results if successful or not to console / dialog box
-			if (id != 0) {
-				System.out.println("Ticket ID : " + id + " created successfully!!!");
-				JOptionPane.showMessageDialog(null, "Ticket id: " + id + " created on " + openDate);
+			if (id != 0) { //the method should return 0 if a ticket is not created
+				System.out.println("Ticket ID : " + id + " created successfully!!!");//print to console ticket was created
+				JOptionPane.showMessageDialog(null, "Ticket id: " + id + " created on " + openDate);//tell user ticket was created
 			} else
-				System.out.println("Ticket cannot be created!!!");
+				System.out.println("Ticket cannot be created!!!");//tell the user teh ticket wasn't created
 		}
 
+		//actions for close ticket button
 		else if (e.getSource() == mnuItemCloseTicket) {
 			try {
+				//prompts user for the ID of the ticket they'd like to close
 				int tickID = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter ticket ID: "));
-				LocalDate close_date = LocalDate.now();
+				LocalDate close_date = LocalDate.now(); //gtet current date
 
+				//pass variables above to the method
 				dao.closeTicket(tickID, close_date);
 
 			} catch (Exception e4) {
@@ -164,6 +167,7 @@ public class Tickets extends JFrame implements ActionListener {
 			}
 		}
 
+		//action for view tickets button
 		else if (e.getSource() == mnuItemViewTicket) {
 
 			// retrieve all tickets details for viewing in JTable
@@ -182,33 +186,30 @@ public class Tickets extends JFrame implements ActionListener {
 			}
 		}
 
+		//actions for delete button
 		else if (e.getSource() == mnuItemDelete) {
 			try {
+				//prompt user for ticket id
 				int tickID = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter ticket ID:"));
-				dao.deleteRecords(tickID);
+				dao.deleteRecords(tickID); //call method and pass tickID as parameter
 
 			} catch (Exception e2) {
 				e2.printStackTrace();
 			}
 		}
 
+		//actions for update button
 		else if (e.getSource() == mnuItemUpdate) {
 			try {
+				//prompt user for ticket id
 				int tickID = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter ticket ID:"));
+				// prompt user for their new desctiption for ticket
 				String updatedDesc = JOptionPane.showInputDialog(null, "Enter a new ticket description");
 
-				dao.updateRecords(updatedDesc, tickID);
+				dao.updateRecords(updatedDesc, tickID); //call method and pass the variables
 			} catch (Exception e3) {
 				e3.printStackTrace();
 			}
 		}
-
-
-		/*
-		 * continue implementing any other desired sub menu items (like for update and
-		 * delete sub menus for example) with similar syntax & logic as shown above
-		 */
-
 	}
-
 }

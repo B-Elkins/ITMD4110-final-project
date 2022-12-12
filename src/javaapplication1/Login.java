@@ -1,5 +1,6 @@
 package javaapplication1;
 
+//Imports
 import java.awt.GridLayout; //useful for layouts
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,13 +18,14 @@ import javax.swing.JTextField;
 @SuppressWarnings("serial")
 public class Login extends JFrame {
 
-	Dao conn;
+	Dao conn;//construct Dao class
 
+	//method to create login screen and authorize
 	public Login() {
 
-		super("IIT HELP DESK LOGIN");
-		conn = new Dao();
-		conn.createTables();
+		super("IIT HELP DESK LOGIN");//windows title
+		conn = new Dao(); //contructor
+		conn.createTables();//call method createTables()
 		setSize(400, 210);
 		setLayout(new GridLayout(4, 2));
 		setLocationRelativeTo(null); // centers window
@@ -34,10 +36,14 @@ public class Login extends JFrame {
 		JLabel lblStatus = new JLabel(" ", JLabel.CENTER);
 		// JLabel lblSpacer = new JLabel(" ", JLabel.CENTER);
 
+		//input space for username
 		JTextField txtUname = new JTextField(10);
 
+		//input space for password
 		JPasswordField txtPassword = new JPasswordField();
+		//submit button
 		JButton btn = new JButton("Submit");
+		//exit button
 		JButton btnExit = new JButton("Exit");
 
 		// constraints
@@ -60,11 +66,12 @@ public class Login extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				boolean admin = false;
+				boolean admin = false; //intialize variable
 				count = count + 1;
 				// verify credentials of user (MAKE SURE TO CHANGE TO YOUR TABLE NAME BELOW)
 				//Connection conn = Dao.getConnection();
 
+				//search user table for the given credentials
 				String query = "SELECT * FROM belki_users2 WHERE uname = ? and upass = ?;";
 				try (PreparedStatement stmt = conn.getConnection().prepareStatement(query)) {
 					stmt.setString(1, txtUname.getText());
