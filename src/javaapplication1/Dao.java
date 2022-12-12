@@ -94,8 +94,8 @@ public class Dao {
 			// and PASS (insert) that data into your User table
 			for (List<String> rowData : array) {
 
-				sql = "insert into belki_support_users2(uname,upass,admin) " + "values('" + rowData.get(0) + "','"
-						+ rowData.get(1) + "','" + rowData.get(2) + "'";
+				sql = "insert into belki_users2(uname,upass,admin) " + "values('" + rowData.get(0) + "','"
+						+ rowData.get(1) + "','" + rowData.get(2) + "');";
 				statement.executeUpdate(sql);
 			}
 			System.out.println("Inserts completed in the given database...");
