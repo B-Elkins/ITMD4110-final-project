@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
@@ -159,7 +158,7 @@ public class Tickets extends JFrame implements ActionListener {
 				LocalDate close_date = LocalDate.now();
 
 				dao.closeTicket(tickID, close_date);
-				
+
 			} catch (Exception e4) {
 				e4.printStackTrace();
 			}
