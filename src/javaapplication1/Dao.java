@@ -177,4 +177,25 @@ public class Dao {
 			e.printStackTrace();
 		}
 	}
+
+	public void closeTicket(int tickID, LocalDate close_date) {
+		try {
+
+			String sql = "UPDATE belki_support_tickets2 " + "SET close_date = " + "'" + close_date + "'" + "WHERE ticket_id = " + tickID;
+			statement = connect.createStatement();
+			statement.execute(sql);
+
+			int response = JOptionPane.showConfirmDialog(null, "Close ticket" + tickID + "?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+			if (response == JOptionPane.NO_OPTION) {
+				System.out.println("NO ticket closed");
+			} else if (response == JOptionPane.YES_OPTION) {
+				statement.executeUpdate(sql);
+			} else if (response == JOptionPane.CLOSED_OPTION) {
+				System.out.println("Request cancelled");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
