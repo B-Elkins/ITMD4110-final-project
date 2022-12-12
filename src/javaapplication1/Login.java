@@ -64,10 +64,10 @@ public class Login extends JFrame {
 				boolean admin = false;
 				count = count + 1;
 				// verify credentials of user (MAKE SURE TO CHANGE TO YOUR TABLE NAME BELOW)
-				Connection conn = Dao.getConnection();
+				//Connection conn = Dao.getConnection();
 
 				String query = "SELECT * FROM belki_support_users WHERE uname = ? and upass = ?;";
-				try (PreparedStatement stmt = conn.prepareStatement(query)) {
+				try (PreparedStatement stmt = conn.getConnection().prepareStatement(query)) {
 					stmt.setString(1, txtUname.getText());
 					stmt.setString(2, txtPassword.getText());
 					ResultSet rs = stmt.executeQuery();
