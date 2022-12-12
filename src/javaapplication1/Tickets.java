@@ -184,7 +184,14 @@ public class Tickets extends JFrame implements ActionListener {
 		}
 
 		else if (e.getSource() == mnuItemUpdate) {
+			try {
+				int tickID = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter ticket ID:"));
+				String updatedDesc = JOptionPane.showInputDialog(null, "Enter a new ticket description");
 
+				dao.updateRecords(updatedDesc, tickID);
+			} catch (Exception e3) {
+				e3.printStackTrace();
+			}
 		}
 
 
