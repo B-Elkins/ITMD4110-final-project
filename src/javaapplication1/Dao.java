@@ -109,12 +109,12 @@ public class Dao {
 		}
 	}
 
-	public int insertRecords(String ticketName, String ticketDesc, LocalDate openDate) {
+	public int insertRecords(String ticketName, String ticketDesc , LocalDate openDate) {
 		int id = 0;
 		try {
 			statement = getConnection().createStatement();
 			statement.executeUpdate("Insert into belki_support_tickets2" + "(ticket_issuer, ticket_description, open_date) values(" + " '"
-					+ ticketName + "','" + ticketDesc + "'," + openDate + "')", Statement.RETURN_GENERATED_KEYS);
+					+ ticketName + "','" + ticketDesc + "','" + openDate + "');", Statement.RETURN_GENERATED_KEYS);
 
 			// retrieve ticket id number newly auto generated upon record insertion
 			ResultSet resultSet = null;
