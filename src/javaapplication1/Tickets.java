@@ -75,6 +75,8 @@ public class Tickets extends JFrame implements ActionListener {
 
 		// initialize close sub menu for tickets main menu
 		mnuItemCloseTicket = new JMenuItem("Close Ticket");
+		// add to Ticket Main menu
+		mnuTickets.add(mnuItemCloseTicket);
 
 		// initialize second sub menu item for Tickets main menu
 		mnuItemViewTicket = new JMenuItem("View Ticket");
