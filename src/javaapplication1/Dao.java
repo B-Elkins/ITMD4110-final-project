@@ -150,7 +150,7 @@ public class Dao {
 			System.out.println("Creating update statement...");
 			statement = connect.createStatement();
 			String sql = "UPDATE belki_support_tickets2 " +
-						 "SET ticket_desc =" + "'" + updatedDesc + "'" +  "WHERE id in (100, 101)";
+						 "SET ticket_desc =" + "'" + updatedDesc + "'" +  "WHERE ticket_id in (100, 101)";
 			statement.executeUpdate(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
