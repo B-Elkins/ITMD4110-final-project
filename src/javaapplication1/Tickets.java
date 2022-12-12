@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -129,15 +130,18 @@ public class Tickets extends JFrame implements ActionListener {
 		// implement actions for sub menu items
 		if (e.getSource() == mnuItemExit) {
 			System.exit(0);
-		} else if (e.getSource() == mnuItemOpenTicket) {
+		} 
+		
+		else if (e.getSource() == mnuItemOpenTicket) {
 
 			// get ticket information
 			String ticketName = JOptionPane.showInputDialog(null, "Enter your name");
 			String ticketDesc = JOptionPane.showInputDialog(null, "Enter a ticket description");
+			LocalDate openDate = LocalDate.now();
 
 			// insert ticket information to database
 
-			int id = dao.insertRecords(ticketName, ticketDesc);
+			int id = dao.insertRecords(ticketName, ticketDesc, openDate);
 
 			// display results if successful or not to console / dialog box
 			if (id != 0) {
@@ -145,6 +149,10 @@ public class Tickets extends JFrame implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Ticket id: " + id + " created");
 			} else
 				System.out.println("Ticket cannot be created!!!");
+		}
+
+		else if (e.getSource() == mnuItemCloseTicket) {
+
 		}
 
 		else if (e.getSource() == mnuItemViewTicket) {
@@ -173,7 +181,7 @@ public class Tickets extends JFrame implements ActionListener {
 
 		}
 
-		else if (e.getSource() == )
+
 		/*
 		 * continue implementing any other desired sub menu items (like for update and
 		 * delete sub menus for example) with similar syntax & logic as shown above
