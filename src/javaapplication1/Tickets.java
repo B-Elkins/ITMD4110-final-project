@@ -32,6 +32,7 @@ public class Tickets extends JFrame implements ActionListener {
 	JMenuItem mnuItemUpdate;
 	JMenuItem mnuItemDelete;
 	JMenuItem mnuItemOpenTicket;
+	JMenuItem mnuItemCloseTicket;
 	JMenuItem mnuItemViewTicket;
 
 	public Tickets(Boolean isAdmin) {
@@ -71,6 +72,9 @@ public class Tickets extends JFrame implements ActionListener {
 		mnuItemOpenTicket = new JMenuItem("Open Ticket");
 		// add to Ticket Main menu item
 		mnuTickets.add(mnuItemOpenTicket);
+
+		// initialize close sub menu for tickets main menu
+		mnuItemCloseTicket = new JMenuItem("Close Ticket");
 
 		// initialize second sub menu item for Tickets main menu
 		mnuItemViewTicket = new JMenuItem("View Ticket");
@@ -164,8 +168,10 @@ public class Tickets extends JFrame implements ActionListener {
 		}
 
 		else if (e.getSource() == mnuItemUpdate) {
-			
+
 		}
+
+		else if (e.getSource() == )
 		/*
 		 * continue implementing any other desired sub menu items (like for update and
 		 * delete sub menus for example) with similar syntax & logic as shown above
